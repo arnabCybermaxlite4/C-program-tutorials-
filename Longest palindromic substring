@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+void expandCenter(char* s, int left, int right, int* start, int* maxLen) {
+    while (left >= 0 && s[right] != '\0' && s[left] == s[right]) {
+        left--;
+        right++;
+    }
+    int len = right - left - 1;
+    if (len > *maxLen) {
+        *start = left + 1;
+        *maxLen = len;
+    }
+}
+
+void longestPalindrome(char* s) {
+    int start = 0, maxLen = 0;
+    int n = strlen(s);
+
+    for (int i = 0; i < n; i++) {
+        expandCenter(s, i, i, &start, &maxLen);     // odd length
+        expandCenter(s, i, i + 1, &start, &maxLen); // even length
+    }
+
+    printf("Longest Palindromic Substring: ");
+    for (int i = start; i < start + maxLen; i++)
+        putchar(s[i]);
+    printf("\n");
+}
+
+int main() {
+    char str[] = "babad";
+    longestPalindrome(str);
+    return 0;
+}
