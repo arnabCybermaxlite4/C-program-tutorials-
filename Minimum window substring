@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+
+#define MAX 256
+
+char* minWindow(char* s, char* t) {
+    static char result[1000] = "";
+
+    int lenS = strlen(s);
+    int lenT = strlen(t);
+
+    if (lenS == 0 || lenT == 0)
+        return "";
+
+    int hashT[MAX] = {0};
+    int hashS[MAX] = {0};
+
+    // Count characters in t
+    for (int i = 0; i < lenT; i++)
+        hashT[t[i]]++;
+
+    int start = 0, minLen = INT_MAX, startIndex = -1;
+    int count = 0;
+
+    for (int end = 0; end < lenS; end++) {
+        hashS[s[end]]++;
+
+        // If character is part of t and count is not exceeded
+        if (hashT[s[end]] != 0 && hashS[s[end]] <= hashT[s[end]])
+            count++;
+
+        // If all characters are matched
+        if (count == lenT) {
+            // Try to minimize the window
+            while (hashT[s[start]] == 0 || hashS[s[start]] > hashT[s[start]]) {
+                if (hashS[s[start]] > hashT[s[start]])
+                    hashS[s[start]]--;
+                start++;
+            }
+
+            int windowLen = end - start + 1;
+            if (windowLen < minLen) {
+                minLen = windowLen;
+                startIndex = start;
+            }
+        }
+    }
+
+    if (startIndex == -1)
+        return "";
+
+    strncpy(result, s + startIndex, minLen);
+    result[minLen] = '\0';
+    return result;
+}
+
+int main() {
+    char s[1000], t[1000];
+
+    printf("Enter main string: ");
+    scanf("%s", s);
+    printf("Enter target pattern: ");
+    scanf("%s", t);
+
+    char* res = minWindow(s, t);
+
+    if (strlen(res) == 0)
+        printf("No such window exists.\n");
+    else
+        printf("Minimum window substring: %s\n", res);
+
+    return 0;
+}
