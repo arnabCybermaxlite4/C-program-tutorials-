@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX 1000
+
+bool isMatch(char *str, char *pattern) {
+    int n = strlen(str);
+    int m = strlen(pattern);
+
+    // Create a 2D DP table
+    bool dp[m + 1][n + 1];
+
+    // Initialize all values to false
+    for (int i = 0; i <= m; i++)
+        for (int j = 0; j <= n; j++)
+            dp[i][j] = false;
+
+    // Empty pattern can match with empty string
+    dp[0][0] = true;
+
+    // Only '*' can match with empty string
+    for (int i = 1; i <= m; i++) {
+        if (pattern[i - 1] == '*')
+            dp[i][0] = dp[i - 1][0];
+    }
+
+    // Fill the DP table
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (pattern[i - 1] == '*')
+                dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+            else if (pattern[i - 1] == '?' || pattern[i - 1] == str[j - 1])
+                dp[i][j] = dp[i - 1][j - 1];
+            else
+                dp[i][j] = false;
+        }
+    }
+
+    return dp[m][n];
+}
+
+int main() {
+    char str[MAX], pattern[MAX];
+
+    printf("Enter string: ");
+    scanf("%s", str);
+    printf("Enter pattern: ");
+    scanf("%s", pattern);
+
+    if (isMatch(str, pattern))
+        printf("Pattern matches the string.\n");
+    else
+        printf("Pattern does not match the string.\n");
+
+    return 0;
+}
