@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 100
+#define MAX_TITLE 50
+#define MAX_AUTHOR 50
+
+int bookCount = 0;
+char titles[MAX_BOOKS][MAX_TITLE];
+char authors[MAX_BOOKS][MAX_AUTHOR];
+
+void addBook() {
+    if (bookCount >= MAX_BOOKS) {
+        printf("Library is full. Cannot add more books.\n");
+        return;
+    }
+
+    printf("Enter Book Title: ");
+    fgets(titles[bookCount], MAX_TITLE, stdin);
+    titles[bookCount][strcspn(titles[bookCount], "\n")] = '\0'; // remove newline
+
+    printf("Enter Author Name: ");
+    fgets(authors[bookCount], MAX_AUTHOR, stdin);
+    authors[bookCount][strcspn(authors[bookCount], "\n")] = '\0';
+
+    bookCount++;
+    printf("Book added successfully!\n");
+}
+
+void displayBooks() {
+    if (bookCount == 0) {
+        printf("No books in the library.\n");
+        return;
+    }
+
+    printf("\n--- List of Books ---\n");
+    for (int i = 0; i < bookCount; i++) {
+        printf("Book %d - Title: %s, Author: %s\n", i + 1, titles[i], authors[i]);
+    }
+}
+
+void searchBook() {
+    char searchTitle[MAX_TITLE];
+    int found = 0;
+
+    printf("Enter book title to search: ");
+    fgets(searchTitle, MAX_TITLE, stdin);
+    searchTitle[strcspn(searchTitle, "\n")] = '\0';
+
+    for (int i = 0; i < bookCount; i++) {
+        if (strcmp(titles[i], searchTitle) == 0) {
+            printf("Found - Book %d: %s by %s\n", i + 1, titles[i], authors[i]);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("Book not found.\n");
+    }
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n--- Simple Library Menu ---\n");
+        printf("1. Add Book\n");
+        printf("2. Display All Books\n");
+        printf("3. Search Book by Title\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // consume newline
+
+        switch (choice) {
+            case 1:
+                addBook();
+                break;
+            case 2:
+                displayBooks();
+                break;
+            case 3:
+                searchBook();
+                break;
+            case 4:
+                printf("Exiting program.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+    }
+
+    return 0;
+}
