@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+#define MAX_STUDENTS 100
+
+int main() {
+    int n, i, countAbove50 = 0;
+    float marks[MAX_STUDENTS];
+    float sum = 0, average, highest, lowest;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > MAX_STUDENTS) {
+        printf("Invalid number of students.\n");
+        return 1;
+    }
+
+    // Input marks
+    for (i = 0; i < n; i++) {
+        printf("Enter marks for student %d: ", i + 1);
+        scanf("%f", &marks[i]);
+
+        sum += marks[i];
+
+        if (i == 0) {
+            highest = lowest = marks[i];
+        } else {
+            if (marks[i] > highest) highest = marks[i];
+            if (marks[i] < lowest) lowest = marks[i];
+        }
+
+        if (marks[i] >= 50) {
+            countAbove50++;
+        }
+    }
+
+    average = sum / n;
+
+    // Display results
+    printf("\n--- Student Marks Summary ---\n");
+    printf("All Marks: ");
+    for (i = 0; i < n; i++) {
+        printf("%.2f ", marks[i]);
+    }
+    printf("\n");
+
+    printf("Highest Marks: %.2f\n", highest);
+    printf("Lowest Marks: %.2f\n", lowest);
+    printf("Average Marks: %.2f\n", average);
+    printf("Number of Students scoring >= 50: %d\n", countAbove50);
+
+    return 0;
+}
