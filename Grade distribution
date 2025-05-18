@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+#define MAX_STUDENTS 100
+
+int main() {
+    int n, i;
+    float marks[MAX_STUDENTS];
+    int countA = 0, countB = 0, countC = 0, countD = 0, countF = 0;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > MAX_STUDENTS) {
+        printf("Invalid number of students.\n");
+        return 1;
+    }
+
+    // Input marks and count grade distribution
+    for (i = 0; i < n; i++) {
+        printf("Enter marks for student %d: ", i + 1);
+        scanf("%f", &marks[i]);
+
+        if (marks[i] >= 90 && marks[i] <= 100)
+            countA++;
+        else if (marks[i] >= 80)
+            countB++;
+        else if (marks[i] >= 70)
+            countC++;
+        else if (marks[i] >= 50)
+            countD++;
+        else
+            countF++;
+    }
+
+    // Display grade distribution
+    printf("\n--- Grade Distribution ---\n");
+    printf("Grade A (90-100): %d students\n", countA);
+    printf("Grade B (80-89):  %d students\n", countB);
+    printf("Grade C (70-79):  %d students\n", countC);
+    printf("Grade D (50-69):  %d students\n", countD);
+    printf("Grade F (<50):    %d students\n", countF);
+
+    return 0;
+}
