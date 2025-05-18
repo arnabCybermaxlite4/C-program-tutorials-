@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 100
+#define TITLE_LEN 50
+
+char titles[MAX_BOOKS][TITLE_LEN];
+int isAvailable[MAX_BOOKS]; // 1 = Available, 0 = Issued
+int bookCount = 0;
+
+void addBook() {
+    if (bookCount >= MAX_BOOKS) {
+        printf("Library is full!\n");
+        return;
+    }
+
+    printf("Enter book title: ");
+    getchar(); // to consume newline
+    fgets(titles[bookCount], TITLE_LEN, stdin);
+    titles[bookCount][strcspn(titles[bookCount], "\n")] = '\0'; // remove newline
+
+    isAvailable[bookCount] = 1; // Mark as available
+    bookCount++;
+    printf("Book added successfully!\n");
+}
+
+void issueBook() {
+    char searchTitle[TITLE_LEN];
+    int found = 0;
+
+    printf("Enter title of the book to issue: ");
+    getchar(); // to consume newline
+    fgets(searchTitle, TITLE_LEN, stdin);
+    searchTitle[strcspn(searchTitle, "\n")] = '\0';
+
+    for (int i = 0; i < bookCount; i++) {
+        if (strcmp(titles[i], searchTitle) == 0) {
+            found = 1;
+            if (isAvailable[i]) {
+                isAvailable[i] = 0;
+                printf("Book '%s' issued successfully.\n", titles[i]);
+            } else {
+                printf("Book '%s' is already issued.\n", titles[i]);
+            }
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Book not found.\n");
+    }
+}
+
+void displayBooks() {
+    if (bookCount == 0) {
+        printf("No books in the library.\n");
+        return;
+    }
+
+    printf("\n--- Library Books ---\n");
+    for (int i = 0; i < bookCount; i++) {
+        printf("Title: %s | Status: %s\n", titles[i], isAvailable[i] ? "Available" : "Issued");
+    }
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n--- Library Menu ---\n");
+        printf("1. Add Book\n");
+        printf("2. Issue Book\n");
+        printf("3. Display All Books\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: addBook(); break;
+            case 2: issueBook(); break;
+            case 3: displayBooks(); break;
+            case 4: printf("Exiting...\n"); return 0;
+            default: printf("Invalid choice. Try again.\n");
+        }
+    }
+
+    return 0;
+}
