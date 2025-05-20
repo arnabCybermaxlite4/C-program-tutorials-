@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int countSetBits(int n) {
+    int count = 0;
+
+    while (n > 0) {
+        if (n % 2 == 1)
+            count++;
+        n = n / 2;
+    }
+
+    return count;
+}
+
+int main() {
+    int num;
+
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
+    int result = countSetBits(num);
+    printf("Number of set bits (1s) in binary: %d\n", result);
+
+    return 0;
+}
