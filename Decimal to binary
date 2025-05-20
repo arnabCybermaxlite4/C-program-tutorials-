@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+void decimalToBinary(int n) {
+    int binary[32]; // to store binary digits
+    int i = 0;
+
+    if (n == 0) {
+        printf("0");
+        return;
+    }
+
+    // Store binary digits in reverse order
+    while (n > 0) {
+        binary[i] = n % 2;
+        n = n / 2;
+        i++;
+    }
+
+    // Print binary digits in reverse (actual order)
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", binary[j]);
+    }
+}
+
+int main() {
+    int num;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
+
+    printf("Binary representation: ");
+    decimalToBinary(num);
+    printf("\n");
+
+    return 0;
+}
