@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+void reverseWords(char* str) {
+    char words[100][100];  // to store individual words
+    int i = 0, j = 0, k = 0;
+
+    // Split the sentence into words
+    while (str[i] != '\0') {
+        if (str[i] != ' ') {
+            words[k][j++] = str[i];
+        } else {
+            words[k][j] = '\0'; // end current word
+            k++;                // move to next word
+            j = 0;
+        }
+        i++;
+    }
+    words[k][j] = '\0'; // end the last word
+
+    // Print words in reverse order
+    for (int x = k; x >= 0; x--) {
+        printf("%s", words[x]);
+        if (x != 0)
+            printf(" ");
+    }
+    printf("\n");
+}
+
+int main() {
+    char sentence[1000];
+
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+
+    // Remove newline at the end if any
+    sentence[strcspn(sentence, "\n")] = '\0';
+
+    printf("Reversed sentence: ");
+    reverseWords(sentence);
+
+    return 0;
+}
