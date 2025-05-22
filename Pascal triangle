@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+// Recursive function to calculate nCr
+int nCr(int n, int r) {
+    if (r == 0 || r == n)
+        return 1;
+    return nCr(n - 1, r - 1) + nCr(n - 1, r);
+}
+
+// Function to print Pascal's Triangle
+void printPascalsTriangle(int rows) {
+    for (int i = 0; i < rows; i++) {
+        // Print spaces for alignment
+        for (int space = 0; space < rows - i - 1; space++) {
+            printf("  ");
+        }
+
+        // Print each value in the row
+        for (int j = 0; j <= i; j++) {
+            printf("%4d", nCr(i, j));
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int n;
+
+    printf("Enter number of rows for Pascal's Triangle: ");
+    scanf("%d", &n);
+
+    printf("Pascal's Triangle:\n");
+    printPascalsTriangle(n);
+
+    return 0;
+}
