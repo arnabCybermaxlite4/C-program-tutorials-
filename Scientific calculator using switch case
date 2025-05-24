@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <math.h>  // for advanced functions
+
+int main() {
+    int choice;
+    double a, b, result;
+
+    printf("==== Scientific Calculator ====\n");
+    printf("1. Addition (a + b)\n");
+    printf("2. Subtraction (a - b)\n");
+    printf("3. Multiplication (a * b)\n");
+    printf("4. Division (a / b)\n");
+    printf("5. Power (a ^ b)\n");
+    printf("6. Square Root (√a)\n");
+    printf("7. Sine (sin(a))\n");
+    printf("8. Cosine (cos(a))\n");
+    printf("9. Tangent (tan(a))\n");
+    printf("Enter your choice (1-9): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &a, &b);
+            result = a + b;
+            break;
+        case 2:
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &a, &b);
+            result = a - b;
+            break;
+        case 3:
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &a, &b);
+            result = a * b;
+            break;
+        case 4:
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &a, &b);
+            if (b == 0) {
+                printf("Error: Division by zero\n");
+                return 1;
+            }
+            result = a / b;
+            break;
+        case 5:
+            printf("Enter base and exponent: ");
+            scanf("%lf %lf", &a, &b);
+            result = pow(a, b);
+            break;
+        case 6:
+            printf("Enter a number: ");
+            scanf("%lf", &a);
+            if (a < 0) {
+                printf("Error: Negative input for square root\n");
+                return 1;
+            }
+            result = sqrt(a);
+            break;
+        case 7:
+            printf("Enter angle in degrees: ");
+            scanf("%lf", &a);
+            result = sin(a * M_PI / 180);
+            break;
+        case 8:
+            printf("Enter angle in degrees: ");
+            scanf("%lf", &a);
+            result = cos(a * M_PI / 180);
+            break;
+        case 9:
+            printf("Enter angle in degrees: ");
+            scanf("%lf", &a);
+            result = tan(a * M_PI / 180);
+            break;
+        default:
+            printf("Invalid choice!\n");
+            return 1;
+    }
+
+    printf("Result = %.4lf\n", result);
+    return 0;
+}
