@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+// Function to calculate factorial
+long long factorial(int n) {
+    long long fact = 1;
+    for (int i = 2; i <= n; i++)
+        fact *= i;
+    return fact;
+}
+
+int main() {
+    int n, r;
+    long long nPr, nCr;
+
+    printf("Enter n and r: ");
+    scanf("%d %d", &n, &r);
+
+    if (r > n) {
+        printf("r should be less than or equal to n.\n");
+        return 1;
+    }
+
+    nPr = factorial(n) / factorial(n - r);
+    nCr = factorial(n) / (factorial(r) * factorial(n - r));
+
+    printf("Permutation (nPr) = %lld\n", nPr);
+    printf("Combination (nCr) = %lld\n", nCr);
+
+    return 0;
+}
