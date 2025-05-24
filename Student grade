@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+int main() {
+    int choice;
+    float marks[3], average;
+    char grade;
+
+    printf("==== Student Grade Management ====\n");
+    printf("1. Input Marks\n");
+    printf("2. Calculate Average\n");
+    printf("3. Determine Grade\n");
+    printf("4. Show Pass/Fail Status\n");
+    printf("Enter your choice (1-4): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Enter marks for 3 subjects (0-100):\n");
+            for (int i = 0; i < 3; i++) {
+                printf("Subject %d: ", i + 1);
+                scanf("%f", &marks[i]);
+            }
+            break;
+
+        case 2:
+            printf("Enter marks for 3 subjects:\n");
+            for (int i = 0; i < 3; i++) {
+                scanf("%f", &marks[i]);
+            }
+            average = (marks[0] + marks[1] + marks[2]) / 3;
+            printf("Average Marks = %.2f\n", average);
+            break;
+
+        case 3:
+            printf("Enter marks for 3 subjects:\n");
+            for (int i = 0; i < 3; i++) {
+                scanf("%f", &marks[i]);
+            }
+            average = (marks[0] + marks[1] + marks[2]) / 3;
+
+            if (average >= 85) grade = 'A';
+            else if (average >= 70) grade = 'B';
+            else if (average >= 50) grade = 'C';
+            else grade = 'F';
+
+            printf("Grade: %c\n", grade);
+            break;
+
+        case 4:
+            printf("Enter marks for 3 subjects:\n");
+            int pass = 1;
+            for (int i = 0; i < 3; i++) {
+                scanf("%f", &marks[i]);
+                if (marks[i] < 40)
+                    pass = 0;
+            }
+
+            if (pass)
+                printf("Status: Pass\n");
+            else
+                printf("Status: Fail\n");
+            break;
+
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
