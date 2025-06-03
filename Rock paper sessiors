@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int userChoice, compChoice;
+
+    printf("Rock(1), Paper(2), Scissors(3) - Enter your choice: ");
+    scanf("%d", &userChoice);
+
+    srand(time(0));  // Seed random number
+    compChoice = rand() % 3 + 1;
+
+    printf("Computer chose: ");
+    switch (compChoice) {
+        case 1: printf("Rock\n"); break;
+        case 2: printf("Paper\n"); break;
+        case 3: printf("Scissors\n"); break;
+    }
+
+    switch (userChoice) {
+        case 1:
+            if (compChoice == 1) printf("Draw!\n");
+            else if (compChoice == 2) printf("You lose!\n");
+            else printf("You win!\n");
+            break;
+        case 2:
+            if (compChoice == 2) printf("Draw!\n");
+            else if (compChoice == 3) printf("You lose!\n");
+            else printf("You win!\n");
+            break;
+        case 3:
+            if (compChoice == 3) printf("Draw!\n");
+            else if (compChoice == 1) printf("You lose!\n");
+            else printf("You win!\n");
+            break;
+        default:
+            printf("Invalid input!\n");
+    }
+
+    return 0;
+}
