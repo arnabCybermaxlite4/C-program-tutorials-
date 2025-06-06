@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    float balance = 10000.00;
+    int choice;
+    float amount;
+
+    while (1) {
+        printf("\n=== ATM Transaction Simulator ===\n");
+        printf("1. Check Balance\n");
+        printf("2. Withdraw\n");
+        printf("3. Deposit\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Your current balance is ₹%.2f\n", balance);
+                break;
+
+            case 2:
+                printf("Enter amount to withdraw: ₹");
+                scanf("%f", &amount);
+                if (amount <= 0) {
+                    printf("Invalid amount. Enter a positive value.\n");
+                } else if (amount > balance) {
+                    printf("Insufficient balance. Transaction failed.\n");
+                } else {
+                    balance -= amount;
+                    printf("₹%.2f withdrawn successfully.\n", amount);
+                    printf("Updated Balance: ₹%.2f\n", balance);
+                }
+                break;
+
+            case 3:
+                printf("Enter amount to deposit: ₹");
+                scanf("%f", &amount);
+                if (amount <= 0) {
+                    printf("Invalid amount. Enter a positive value.\n");
+                } else {
+                    balance += amount;
+                    printf("₹%.2f deposited successfully.\n", amount);
+                    printf("Updated Balance: ₹%.2f\n", balance);
+                }
+                break;
+
+            case 4:
+                printf("Thank you for using the ATM. Goodbye!\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
