@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int totalSeats = 100;
+    int bookedSeats = 0;
+    int choice, tickets;
+
+    while (1) {
+        printf("\n=== Railway Reservation System ===\n");
+        printf("1. Book Ticket\n");
+        printf("2. Cancel Ticket\n");
+        printf("3. View Available Seats\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter number of tickets to book: ");
+                scanf("%d", &tickets);
+                if (tickets <= 0) {
+                    printf("Invalid ticket number!\n");
+                } else if (bookedSeats + tickets > totalSeats) {
+                    printf("Only %d tickets available. Cannot book %d tickets.\n", totalSeats - bookedSeats, tickets);
+                } else {
+                    bookedSeats += tickets;
+                    printf("%d ticket(s) booked successfully!\n", tickets);
+                }
+                break;
+
+            case 2:
+                printf("Enter number of tickets to cancel: ");
+                scanf("%d", &tickets);
+                if (tickets <= 0) {
+                    printf("Invalid ticket number!\n");
+                } else if (tickets > bookedSeats) {
+                    printf("You have only %d booked ticket(s). Cannot cancel %d tickets.\n", bookedSeats, tickets);
+                } else {
+                    bookedSeats -= tickets;
+                    printf("%d ticket(s) cancelled successfully!\n", tickets);
+                }
+                break;
+
+            case 3:
+                printf("Total Seats: %d\n", totalSeats);
+                printf("Booked Seats: %d\n", bookedSeats);
+                printf("Available Seats: %d\n", totalSeats - bookedSeats);
+                break;
+
+            case 4:
+                printf("Exiting the system. Thank you!\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
