@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main() {
+    int rows;
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+
+    for (int i = 0; i < rows; i++) {
+        int value = 1;
+
+        // Print spaces for alignment
+        for (int space = 0; space < rows - i - 1; space++)
+            printf("  ");
+
+        for (int j = 0; j <= i; j++) {
+            printf("%4d", value);
+            value = value * (i - j) / (j + 1);  // Efficient formula
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
