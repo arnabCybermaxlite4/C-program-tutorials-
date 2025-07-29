@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+#define MAX_EMPLOYEES 100
+
+// Structure to hold employee information
+typedef struct {
+    int id;
+    char name[50];
+    float basic_salary;
+    float bonus;
+    float total_salary;  // basic_salary + bonus
+} Employee;
+
+// Function to calculate total salary for an employee
+void calculateTotalSalary(Employee *emp) {
+    emp->total_salary = emp->basic_salary + emp->bonus;
+}
+
+int main() {
+    int num_employees;
+    printf("Enter the number of employees: ");
+    scanf("%d", &num_employees);
+
+    if (num_employees > MAX_EMPLOYEES || num_employees <= 0) {
+        printf("Please enter a valid number of employees (1-%d).\n", MAX_EMPLOYEES);
+        return 1;
+    }
+
+    Employee employees[num_employees];
+
+    // Input employee details
+    for (int i = 0; i < num_employees; i++) {
+        printf("\nEnter details for Employee %d:\n", i + 1);
+        printf("Employee ID: ");
+        scanf("%d", &employees[i].id);
+
+        printf("Employee Name: ");
+        scanf("%s", employees[i].name);
+
+        printf("Basic Salary: ");
+        scanf("%f", &employees[i].basic_salary);
+
+        printf("Bonus: ");
+        scanf("%f", &employees[i].bonus);
+
+        calculateTotalSalary(&employees[i]);
+    }
+
+    // Display employee payroll information
+    printf("\n===== Employee Payroll =====\n");
+    printf("%-10s %-15s %-15s %-10s %-15s\n", "Emp ID", "Name", "Basic Salary", "Bonus", "Total Salary");
+    for (int i = 0; i < num_employees; i++) {
+        printf("%-10d %-15s %-15.2f %-10.2f %-15.2f\n",
+            employees[i].id,
+            employees[i].name,
+            employees[i].basic_salary,
+            employees[i].bonus,
+            employees[i].total_salary);
+    }
+
+    return 0;
+}
