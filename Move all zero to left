@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+void moveZerosToLeft(int arr[], int n) {
+    int count = n - 1;  // Position for non-zero elements from right
+    int i;
+
+    // Traverse from right side
+    for (i = n - 1; i >= 0; i--) {
+        if (arr[i] != 0) {
+            arr[count] = arr[i];
+            count--;
+        }
+    }
+
+    // Fill remaining places with 0
+    for (i = count; i >= 0; i--) {
+        arr[i] = 0;
+    }
+}
+
+int main() {
+    int arr[100], n, i;
+
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+
+    printf("Enter elements of array:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    moveZerosToLeft(arr, n);
+
+    printf("Array after moving zeros to left:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
