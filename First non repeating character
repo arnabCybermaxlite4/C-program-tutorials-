@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+
+void firstNonRepeating(char str[]) {
+    int count[256] = {0};  // Frequency array
+
+    // Count frequencies
+    for (int i = 0; str[i] != '\0'; i++) {
+        count[(unsigned char)str[i]]++;
+    }
+
+    // Find first non-repeating character
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (count[(unsigned char)str[i]] == 1) {
+            printf("✅ First non-repeating character: %c\n", str[i]);
+            return;
+        }
+    }
+
+    printf("❌ No non-repeating character found.\n");
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    firstNonRepeating(str);
+    return 0;
+}
