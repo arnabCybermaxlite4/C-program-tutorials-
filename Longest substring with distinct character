@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+int longestDistinctSubstring(char str[]) {
+    int n = strlen(str);
+    int visited[256]; // to store last index of characters
+    for (int i = 0; i < 256; i++)
+        visited[i] = -1;
+
+    int maxLen = 0;   // Result
+    int start = 0;    // Starting index of current window
+
+    for (int end = 0; end < n; end++) {
+        // If char already seen, move start to after previous index
+        if (visited[(unsigned char)str[end]] >= start) {
+            start = visited[(unsigned char)str[end]] + 1;
+        }
+
+        // Update last seen index of current char
+        visited[(unsigned char)str[end]] = end;
+
+        // Update maximum length
+        int windowLen = end - start + 1;
+        if (windowLen > maxLen)
+            maxLen = windowLen;
+    }
+
+    return maxLen;
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    int length = longestDistinctSubstring(str);
+    printf("✅ Length of longest substring with distinct characters: %d\n", length);
+
+    return 0;
+}
