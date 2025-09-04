@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+
+int allUnique(char *str) {
+    int visited[256] = {0};  // for all ASCII characters
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        unsigned char ch = str[i];
+        if (visited[ch]) {
+            return 0;  // character already seen → not unique
+        }
+        visited[ch] = 1; // mark as seen
+    }
+    return 1; // all unique
+}
+
+int main() {
+    char str[200];
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // remove newline (if any)
+    str[strcspn(str, "\n")] = '\0';
+
+    if (allUnique(str))
+        printf("✅ The string has all unique characters.\n");
+    else
+        printf("❌ The string has duplicate characters.\n");
+
+    return 0;
+}
