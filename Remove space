@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+    char str[200];
+    char result[200];
+    int i, j = 0;
+
+    printf("Enter a string: ");
+    gets(str);   // beginner friendly (unsafe, but okay for practice)
+
+    // Copy only non-space characters
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ') {
+            result[j] = str[i];
+            j++;
+        }
+    }
+    result[j] = '\0';  // end string
+
+    printf("String without spaces: %s\n", result);
+
+    return 0;
+}
