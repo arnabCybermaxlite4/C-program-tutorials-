@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[200], words[50][50];
+    int i, j, k, count[50], wordCount = 0;
+
+    printf("Enter a sentence: ");
+    gets(str);   // (unsafe but simple for beginners)
+
+    // Split into words
+    char *token = strtok(str, " ");
+    while (token != NULL) {
+        strcpy(words[wordCount], token);
+        count[wordCount] = 1; // initial count
+        wordCount++;
+        token = strtok(NULL, " ");
+    }
+
+    // Count frequencies
+    for (i = 0; i < wordCount; i++) {
+        if (count[i] == 0) continue; // already counted
+
+        for (j = i + 1; j < wordCount; j++) {
+            if (strcmp(words[i], words[j]) == 0) {
+                count[i]++;
+                count[j] = 0; // mark duplicate
+            }
+        }
+    }
+
+    // Print result
+    printf("\nWord frequencies:\n");
+    for (i = 0; i < wordCount; i++) {
+        if (count[i] > 0) {
+            printf("%s = %d\n", words[i], count[i]);
+        }
+    }
+
+    return 0;
+}
