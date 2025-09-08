@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char str[200];
+    int i;
+
+    printf("Enter a sentence: ");
+    gets(str);  // (unsafe but simple for beginners)
+
+    int len = strlen(str);
+    for (i = 0; i < len; i++) {
+        // If first character OR after a space
+        if (i == 0 || str[i-1] == ' ') {
+            str[i] = toupper(str[i]);
+        } else {
+            str[i] = tolower(str[i]);
+        }
+    }
+
+    printf("Title Case: %s\n", str);
+    return 0;
+}
