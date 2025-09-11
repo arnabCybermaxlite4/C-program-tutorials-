@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+void mergeSortedArrays(int arr1[], int n1, int arr2[], int n2, int merged[]) {
+    int i = 0, j = 0, k = 0;
+    // Traverse both arrays and copy the smaller element
+    while (i < n1 && j < n2) {
+        if (arr1[i] < arr2[j]) {
+            merged[k++] = arr1[i++];
+        } else {
+            merged[k++] = arr2[j++];
+        }
+    }
+    // Copy remaining elements of arr1, if any
+    while (i < n1) {
+        merged[k++] = arr1[i++];
+    }
+    // Copy remaining elements of arr2, if any
+    while (j < n2) {
+        merged[k++] = arr2[j++];
+    }
+}
+
+int main() {
+    int arr1[] = {12, 18, 40, 60};
+    int arr2[] = {47, 56, 89, 90};
+    int n1 = sizeof(arr1) / sizeof(arr1);
+    int n2 = sizeof(arr2) / sizeof(arr2);
+    int merged[n1 + n2];
+
+    mergeSortedArrays(arr1, n1, arr2, n2, merged);
+
+    printf("Merged Array: ");
+    for (int i = 0; i < n1 + n2; i++) {
+        printf("%d ", merged[i]);
+    }
+    return 0;
+}
