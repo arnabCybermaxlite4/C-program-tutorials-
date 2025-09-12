@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int isVowel(char c) {
+    c = tolower(c);  // make lowercase for easy checking
+    return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+}
+
+int main() {
+    char str[200], result[200];
+    int i, j = 0;
+
+    printf("Enter a string: ");
+    gets(str);  // for beginners (unsafe but simple)
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (!isVowel(str[i])) {
+            result[j++] = str[i];  // copy only non-vowels
+        }
+    }
+    result[j] = '\0';  // null terminate
+
+    printf("String without vowels: %s\n", result);
+
+    return 0;
+}
